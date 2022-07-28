@@ -1,10 +1,8 @@
-// @ts-ignore
 import fs from "fs/promises";
 
 const emailsForCurrency: Map<string, Set<string>> = new Map<string, Set<string>>();
 
 export async function initLoadEmails(currencyCode: string) {
-    // const emailCurrencySet: Set<string> = new Set<string>();
     const filePath = getFilePathByCurrencyCode(currencyCode);
     const fileContents: string = await fs.readFile(filePath, "utf-8");
     const emailsString: Array<string> = fileContents.split("\n")
@@ -13,8 +11,8 @@ export async function initLoadEmails(currencyCode: string) {
         .filter(email => email !== "");
 
     emailsForCurrency.set(currencyCode, new Set<string>(emails));
-    console.log(emails)
 }
+
 
 export async function addEmail(currencyCode: string, email: string) {
     const emails: any = emailsForCurrency.get(currencyCode)

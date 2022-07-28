@@ -1,13 +1,9 @@
-// @ts-ignore
 import path from "path";
-// import nodemailer from "nodemailer";
-const nodemailer = require('nodemailer');
-// @ts-ignore
 import dotenv from "dotenv";
+const nodemailer = require('nodemailer');
 
-dotenv.config({path: path.resolve(__dirname, "mail.env")});
+dotenv.config({path: path.resolve(__dirname, "smtp_config.env")});
 
-console.log("===> ", process.env.SMTP_USERNAME)
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: 587,
@@ -29,5 +25,4 @@ export async function sendEmail(subject: string, message: string, to: string) {
     };
 
     const result = await transporter.sendMail(mailConfig);
-    console.log(result)
 }

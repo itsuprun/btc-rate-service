@@ -5,7 +5,7 @@ import {requestCurrentRate} from "./rate_resource";
 const CURRENCY_CODE = "BTC";
 
 export async function getCurrentBtcRate() {
-    return await requestCurrentRate("BTC", "UAH");
+    return await requestCurrentRate("UAH");
 }
 
 

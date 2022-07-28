@@ -1,11 +1,10 @@
 import axios from "axios";
 
-// @ts-ignore
-export async function requestCurrentRate(origin: string, target: string) {
-    const resourceLink = "/v1/exchangerate/" + origin + "/" + target;
+export async function requestCurrentRate(target: string) {
+    const resourceLink = 'https://api.coinstats.app/public/v1/coins/bitcoin?currency=' + target;
     const config = {
         method: 'get',
-        url: 'https://api.coinstats.app/public/v1/coins/bitcoin?currency=' + target
+        url: resourceLink
     };
 
     const resultResponse = await axios.get(config.url, config)

@@ -1,7 +1,6 @@
-import {requestCurrentRate} from "./rate_resource";
+import express from "express";
+import bodyParser from "body-parser";
 
-const express = require("express")
-const bodyParser = require("body-parser");
 import * as btcRateService from "./btc_rate_service";
 
 export const app = express()
@@ -34,6 +33,8 @@ app.post("/subscribe", async (req: any, res: any) => {
 
 app.post("/sendEmails", (req: any, res: any) => {
     btcRateService.sendBtcRateEmails();
+    res.setHeader('content-type', 'application/json');
+    res.status(200)
     res.send({"success": true})
 });
 
@@ -43,8 +44,8 @@ app.listen(3000, async () => {
     await btcRateService.initLoadEmailForBtcRate();
 })
 
+
 async function tryAddEmail(email: string) {
-    // @ts-ignore
     try {
         await btcRateService.subscribeBtcRate(email);
         return {"success": true, "email": email, "message": "Successfully added"};
